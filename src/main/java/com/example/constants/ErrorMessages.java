@@ -17,5 +17,12 @@ public interface ErrorMessages {
 	public final String EMAIL_ALREADY_EXITS = "Email already exists";
 	public final String CONTACT_ALREADY_EXITS = "Contact number already exists";
 	public final String USER_REGISTRATION_FAILED = "User registration failed! Please try again later";
+	
+	public final String CREDENTIALS_REQUIRED = "Please provide credentials for login";
+	public final String USER_ID_REQUIRED= "Please enter registered email id";
+	public final String ENTER_PASSWORD= "Please enter password";
+	public final String NOT_REGISTERED_YET = "You are not registered yet! Please register and login again";
+	public final String REGISTERED_EMAIL_ID = "Please enter registered email id";
+	public final String INCORRECT_PASSWORD = "Your password is incorrect";
 		
 }

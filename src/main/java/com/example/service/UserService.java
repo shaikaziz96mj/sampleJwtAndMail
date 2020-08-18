@@ -8,11 +8,17 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.constants.ErrorMessages;
+import com.example.constants.MessageConstants;
 import com.example.constants.SuccessMessages;
+import com.example.domain.LoginRequest;
+import com.example.domain.LoginResponse;
 import com.example.domain.ResponseObject;
 import com.example.domain.User;
 import com.example.domain.UserRegistration;
@@ -134,6 +140,49 @@ public class UserService implements IUserService {
 			e.printStackTrace();
 			return new ResponseObject(null, e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
+	}
+	
+	@Override
+	public ResponseObject userLogin(LoginRequest loginRequest) {
+		
+		User userDetails=new User();
+		
+		if(CommonUtils.isNull(loginRequest.getUserId()) && CommonUtils.isNull(loginRequest.getPassword())) {
+			return new ResponseObject(null, ErrorMessages.CREDENTIALS_REQUIRED, HttpStatus.BAD_REQUEST);
+		}
+		if(CommonUtils.isNull(loginRequest.getUserId())) {
+			return new ResponseObject(null, ErrorMessages.USER_ID_REQUIRED, HttpStatus.BAD_REQUEST);
+		}
+		boolean emailChecker=emailChecker(loginRequest.getUserId());
+		if(emailChecker==false) {
+			return new ResponseObject(null, ErrorMessages.CHECK_EMAIL_FORMAT, HttpStatus.BAD_REQUEST);
+		}
+		if(loginRequest.getUserId().contains("@")) {
+			userDetails=userDetailsRepository.getUserByEmailAddress(loginRequest.getUserId().toLowerCase());
+			if(userDetails==null) {
+				return new ResponseObject(null, ErrorMessages.NOT_REGISTERED_YET, HttpStatus.BAD_REQUEST);
+			}
+		}
+		if(CommonUtils.isNull(loginRequest.getPassword())) {
+			return new ResponseObject(null, ErrorMessages.ENTER_PASSWORD, HttpStatus.BAD_REQUEST);
+		}
+		if (!passwordEncoder.matches(loginRequest.getPassword(), userDetails.getPassword())) {
+			return new ResponseObject(null, ErrorMessages.INCORRECT_PASSWORD, HttpStatus.BAD_REQUEST);
+		}
+		
+		try {
+			Authentication authentication = authenticationManager.authenticate(
+					new UsernamePasswordAuthenticationToken(userDetails.getExternalId(), loginRequest.getPassword()));
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+			String jwtToken = tokenProvider.generateJwtToken(authentication, userDetails);
+			LoginResponse loginResponse=new LoginResponse(jwtToken, MessageConstants.BEARER, userDetails.getFirstName(), userDetails.getFullName(),
+					userDetails.getEmailAddress(), userDetails.getContactNumber(), userDetails.getExternalId());
+			return new ResponseObject(loginResponse, null, HttpStatus.OK);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return new ResponseObject(null, e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		
 	}
 	
 }

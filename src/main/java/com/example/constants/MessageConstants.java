@@ -10,4 +10,6 @@ public interface MessageConstants {
 
 	public static final String UNAUTHORIZED = "UNAUTHORIZED";
 
+	public static final String BEARER = "Bearer";
+
 }

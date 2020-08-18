@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.domain.LoginRequest;
 import com.example.domain.ResponseObject;
 import com.example.domain.UserRegistration;
 import com.example.service.IUserService;
@@ -20,6 +21,11 @@ public class UserController {
 	@PostMapping("/registerUser")
 	public ResponseObject userRegistration(@RequestBody UserRegistration userRegistration) {
 		return userService.registerUser(userRegistration);
+	}
+	
+	@PostMapping("/userLogin")
+	public ResponseObject userLogin(@RequestBody LoginRequest loginRequest) {
+		return userService.userLogin(loginRequest);
 	}
 	
 }
