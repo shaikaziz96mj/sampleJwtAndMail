@@ -24,5 +24,8 @@ public interface ErrorMessages {
 	public final String NOT_REGISTERED_YET = "You are not registered yet! Please register and login again";
 	public final String REGISTERED_EMAIL_ID = "Please enter registered email id";
 	public final String INCORRECT_PASSWORD = "Your password is incorrect";
+	
+	public final String AUTHENTICATION_TOKEN_REQUIRED = "Please provide authentication token";
+	public final String NO_RECORDS_FOUND = "No records found";
 		
 }

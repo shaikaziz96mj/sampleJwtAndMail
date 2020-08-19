@@ -1,12 +1,21 @@
 package com.example.service;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -37,6 +46,8 @@ public class UserService implements IUserService {
 	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private JwtTokenProvider tokenProvider;
+	@Autowired
+	private JavaMailSender mailSender;
 
 	@Autowired
 	public UserService(AuthenticationManager authenticationManager, UserDetailsRepository userRepository,
@@ -66,6 +77,26 @@ public class UserService implements IUserService {
 		return pat.matcher(contactNumber).matches();
 	}
 
+	private void triggerMail(String msgs,String subject,String mailAddress){
+		MimeMessage message=null;
+		MimeMessageHelper helper=null;
+		try {
+			message=mailSender.createMimeMessage();
+			//prepare email messages
+			helper=new MimeMessageHelper(message,true);
+			helper.setTo(new InternetAddress(mailAddress));
+			helper.setSentDate(new Date());
+			helper.setText(msgs);
+			helper.setSubject(subject);
+			//helper.addAttachment("attachment", new ClassPathResource("register.png"));
+			mailSender.send(message);
+			System.out.println("message delivered successfully");
+		}//try
+		catch(MessagingException me) {
+			me.printStackTrace();
+		}
+	}
+	
 	@Override
 	public ResponseObject registerUser(UserRegistration userRegistration) {
 		
@@ -130,6 +161,11 @@ public class UserService implements IUserService {
 					userRegistration.getContactNumber(), passwordEncoder.encode(userRegistration.getPassword()), 
 					Calendar.getInstance(), Calendar.getInstance(), null);
 			User response=userDetailsRepository.saveAndFlush(register);
+			
+			String registrationMsg= "Dear User,\r\n" + "\r\n" + "Thank you for your registration with our Sample Development Application.!"
+			+ "\r\n" + "You can now login using the registered email id\r\n" + "\r\n" +"Best Regards\r\n" + "Developer Team";
+			triggerMail(registrationMsg, MessageConstants.REGISTRATION, userRegistration.getEmailAddress());
+			
 			if(response==null) {
 				return new ResponseObject(null, ErrorMessages.USER_REGISTRATION_FAILED, HttpStatus.BAD_REQUEST);
 			}else {
@@ -177,12 +213,37 @@ public class UserService implements IUserService {
 			String jwtToken = tokenProvider.generateJwtToken(authentication, userDetails);
 			LoginResponse loginResponse=new LoginResponse(jwtToken, MessageConstants.BEARER, userDetails.getFirstName(), userDetails.getFullName(),
 					userDetails.getEmailAddress(), userDetails.getContactNumber(), userDetails.getExternalId());
+			
+			String logInMsg= "Dear User,\r\n" + "\r\n" + "You have logged in on Sample Development Application at "+ new Date()+"\r\n"
+					+"\r\nBest Regards\r\n" + "Developer Team";
+			triggerMail(logInMsg, MessageConstants.LOGGED_IN, loginRequest.getUserId());
+			
 			return new ResponseObject(loginResponse, null, HttpStatus.OK);
 		}catch(Exception e) {
 			e.printStackTrace();
 			return new ResponseObject(null, e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
-		
+	}
+	
+	@Override
+	public ResponseObject fetchAllUsers(String authToken) {
+		if(CommonUtils.isNull(authToken)) {
+			return new ResponseObject(null, ErrorMessages.AUTHENTICATION_TOKEN_REQUIRED, HttpStatus.BAD_REQUEST);
+		}
+		try {
+			String token=authToken.substring(7);
+			String externalId=CommonUtils.getUserExternalId(token);
+			@SuppressWarnings("unused")
+			User user=userDetailsRepository.getUserByExternalId(externalId);
+			List<User> userList=userDetailsRepository.findAll(Sort.by(Direction.ASC, "id"));
+			if(userList.isEmpty()) {
+				return new ResponseObject(null, ErrorMessages.NO_RECORDS_FOUND, HttpStatus.BAD_REQUEST);
+			}
+			return new ResponseObject(userList, null, HttpStatus.OK);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return new ResponseObject(null, e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 }

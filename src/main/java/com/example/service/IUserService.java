@@ -10,4 +10,6 @@ public interface IUserService {
 
 	public ResponseObject userLogin(LoginRequest loginRequest);
 
+	public ResponseObject fetchAllUsers(String authToken);
+
 }

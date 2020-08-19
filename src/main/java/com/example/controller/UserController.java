@@ -1,8 +1,10 @@
 package com.example.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +28,11 @@ public class UserController {
 	@PostMapping("/userLogin")
 	public ResponseObject userLogin(@RequestBody LoginRequest loginRequest) {
 		return userService.userLogin(loginRequest);
+	}
+	
+	@GetMapping("/allUsers")
+	public ResponseObject fetchAllUsers(@RequestHeader("Authorization") String authToken) {
+		return userService.fetchAllUsers(authToken);
 	}
 	
 }
