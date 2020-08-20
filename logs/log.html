@@ -11,7 +11,7 @@ th {background: #336699; color: #FFFFFF; text-align: left;}
 </head>
 <body bgcolor="#FFFFFF" topmargin="6" leftmargin="6">
 <hr size="1" noshade>
-Log session start time Thu Aug 20 13:04:59 IST 2020<br>
+Log session start time Thu Aug 20 14:04:26 IST 2020<br>
 <br>
 <table cellspacing="0" cellpadding="4" border="1" bordercolor="#224466" width="100%">
 <tr>
@@ -31,17 +31,161 @@ Log session start time Thu Aug 20 13:04:59 IST 2020<br>
 </tr>
 
 <tr>
-<td>99917</td>
-<td title="http-nio-9000-exec-3 thread">http-nio-9000-exec-3</td>
-<td title="Level">INFO</td>
-<td title="com.example.controller.UserController category">com.example.controller.UserController</td>
-<td title="Message">userLogin() initiated</td>
+<td>5</td>
+<td title="http-nio-9000-exec-1 thread">http-nio-9000-exec-1</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="com.example.aspect.CachingAdvice category">com.example.aspect.CachingAdvice</td>
+<td title="Message">CachingAdvice(key):ResponseObject com.example.service.UserService.userLogin(LoginRequest)[LoginRequest [userId=shaikaziz.mj@gmail.com, password=shaikaziz@96]]</td>
 </tr>
 
 <tr>
-<td>222163</td>
+<td>5</td>
+<td title="http-nio-9000-exec-1 thread">http-nio-9000-exec-1</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="com.example.aspect.LoggingAdvice category">com.example.aspect.LoggingAdvice</td>
+<td title="Message">Entering into method::ResponseObject com.example.service.UserService.userLogin(LoginRequest)  with arguments::[LoginRequest [userId=shaikaziz.mj@gmail.com, password=shaikaziz@96]]</td>
+</tr>
+
+<tr>
+<td>8</td>
+<td title="http-nio-9000-exec-1 thread">http-nio-9000-exec-1</td>
+<td title="Level">INFO</td>
+<td title="com.example.service.UserService category">com.example.service.UserService</td>
+<td title="Message">loginRequest object:LoginRequest [userId=shaikaziz.mj@gmail.com, password=shaikaziz@96]</td>
+</tr>
+
+<tr>
+<td>8</td>
+<td title="http-nio-9000-exec-1 thread">http-nio-9000-exec-1</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="com.example.service.UserService category">com.example.service.UserService</td>
+<td title="Message">emailChecker(-) initiated with email:shaikaziz.mj@gmail.com</td>
+</tr>
+
+<tr>
+<td>399</td>
+<td title="http-nio-9000-exec-1 thread">http-nio-9000-exec-1</td>
+<td title="Level">INFO</td>
+<td title="com.example.service.UserService category">com.example.service.UserService</td>
+<td title="Message">user login response:LoginResponse [accessToken=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNTk4MDg1Mjc3MjE4IiwianRpIjoiMDlkNGFlYTAtNzA4OC00Y2I3LTgzMDktNTVmZGYwYzVjZTA2IiwiaWF0IjoxNTk3OTEyNDc3LCJleHAiOjE1OTgwODUyNzd9.Ge1nCsU4mDaDmO097MKmjxqBMs3snb6GZwBwyamu19VRzoFaYOaOD1cgQ2vBbrOL4SQ9WIhZG1Fvl8POWdprkw, tokenType=Bearer, firstName=Shaik, fullName=Shaik Aziz Ahmed, email=shaikaziz.mj@gmail.com, contactNumber=9700611088, externalId=09d4aea0-7088-4cb7-8309-55fdf0c5ce06]</td>
+</tr>
+
+<tr>
+<td>399</td>
+<td title="http-nio-9000-exec-1 thread">http-nio-9000-exec-1</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="com.example.service.UserService category">com.example.service.UserService</td>
+<td title="Message">triggerMail(-) initiated with email and subject:shaikaziz.mj@gmail.com,User Login</td>
+</tr>
+
+<tr>
+<td>4181</td>
+<td title="http-nio-9000-exec-1 thread">http-nio-9000-exec-1</td>
+<td title="Level">INFO</td>
+<td title="com.example.service.UserService category">com.example.service.UserService</td>
+<td title="Message">E-mail send to registered email for user login</td>
+</tr>
+
+<tr>
+<td>4181</td>
+<td title="http-nio-9000-exec-1 thread">http-nio-9000-exec-1</td>
+<td title="Level">INFO</td>
+<td title="com.example.aspect.PerformanceMonitoringAdvice category">com.example.aspect.PerformanceMonitoringAdvice</td>
+<td title="Message">ResponseObject com.example.service.UserService.userLogin(LoginRequest) with the arguments ::[LoginRequest [userId=shaikaziz.mj@gmail.com, password=shaikaziz@96]] has taken::4 seconds</td>
+</tr>
+
+<tr>
+<td>4181</td>
+<td title="http-nio-9000-exec-1 thread">http-nio-9000-exec-1</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="com.example.aspect.LoggingAdvice category">com.example.aspect.LoggingAdvice</td>
+<td title="Message">Exiting from method::ResponseObject com.example.service.UserService.userLogin(LoginRequest)  with arguments::[LoginRequest [userId=shaikaziz.mj@gmail.com, password=shaikaziz@96]]</td>
+</tr>
+
+<tr>
+<td>4181</td>
+<td title="http-nio-9000-exec-1 thread">http-nio-9000-exec-1</td>
+<td title="Level">INFO</td>
+<td title="com.example.aspect.CachingAdvice category">com.example.aspect.CachingAdvice</td>
+<td title="Message">Response from service class(CachingAdvice)</td>
+</tr>
+
+<tr>
+<td>43557</td>
+<td title="http-nio-9000-exec-3 thread">http-nio-9000-exec-3</td>
+<td title="Level">INFO</td>
+<td title="com.example.controller.UserController category">com.example.controller.UserController</td>
+<td title="Message">fetchAllUsers() initiated</td>
+</tr>
+
+<tr>
+<td>43557</td>
+<td title="http-nio-9000-exec-3 thread">http-nio-9000-exec-3</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="com.example.aspect.CachingAdvice category">com.example.aspect.CachingAdvice</td>
+<td title="Message">CachingAdvice(key):ResponseObject com.example.service.UserService.fetchAllUsers(String)[Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNTk4MDg1Mjc3MjE4IiwianRpIjoiMDlkNGFlYTAtNzA4OC00Y2I3LTgzMDktNTVmZGYwYzVjZTA2IiwiaWF0IjoxNTk3OTEyNDc3LCJleHAiOjE1OTgwODUyNzd9.Ge1nCsU4mDaDmO097MKmjxqBMs3snb6GZwBwyamu19VRzoFaYOaOD1cgQ2vBbrOL4SQ9WIhZG1Fvl8POWdprkw]</td>
+</tr>
+
+<tr>
+<td>43557</td>
+<td title="http-nio-9000-exec-3 thread">http-nio-9000-exec-3</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="com.example.aspect.LoggingAdvice category">com.example.aspect.LoggingAdvice</td>
+<td title="Message">Entering into method::ResponseObject com.example.service.UserService.fetchAllUsers(String)  with arguments::[Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNTk4MDg1Mjc3MjE4IiwianRpIjoiMDlkNGFlYTAtNzA4OC00Y2I3LTgzMDktNTVmZGYwYzVjZTA2IiwiaWF0IjoxNTk3OTEyNDc3LCJleHAiOjE1OTgwODUyNzd9.Ge1nCsU4mDaDmO097MKmjxqBMs3snb6GZwBwyamu19VRzoFaYOaOD1cgQ2vBbrOL4SQ9WIhZG1Fvl8POWdprkw]</td>
+</tr>
+
+<tr>
+<td>43557</td>
+<td title="http-nio-9000-exec-3 thread">http-nio-9000-exec-3</td>
+<td title="Level">INFO</td>
+<td title="com.example.service.UserService category">com.example.service.UserService</td>
+<td title="Message">User auth token(fetchAllUSers()):Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNTk4MDg1Mjc3MjE4IiwianRpIjoiMDlkNGFlYTAtNzA4OC00Y2I3LTgzMDktNTVmZGYwYzVjZTA2IiwiaWF0IjoxNTk3OTEyNDc3LCJleHAiOjE1OTgwODUyNzd9.Ge1nCsU4mDaDmO097MKmjxqBMs3snb6GZwBwyamu19VRzoFaYOaOD1cgQ2vBbrOL4SQ9WIhZG1Fvl8POWdprkw</td>
+</tr>
+
+<tr>
+<td>43584</td>
+<td title="http-nio-9000-exec-3 thread">http-nio-9000-exec-3</td>
+<td title="Level">INFO</td>
+<td title="com.example.aspect.PerformanceMonitoringAdvice category">com.example.aspect.PerformanceMonitoringAdvice</td>
+<td title="Message">ResponseObject com.example.service.UserService.fetchAllUsers(String) with the arguments ::[Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNTk4MDg1Mjc3MjE4IiwianRpIjoiMDlkNGFlYTAtNzA4OC00Y2I3LTgzMDktNTVmZGYwYzVjZTA2IiwiaWF0IjoxNTk3OTEyNDc3LCJleHAiOjE1OTgwODUyNzd9.Ge1nCsU4mDaDmO097MKmjxqBMs3snb6GZwBwyamu19VRzoFaYOaOD1cgQ2vBbrOL4SQ9WIhZG1Fvl8POWdprkw] has taken::0 seconds</td>
+</tr>
+
+<tr>
+<td>43584</td>
+<td title="http-nio-9000-exec-3 thread">http-nio-9000-exec-3</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="com.example.aspect.LoggingAdvice category">com.example.aspect.LoggingAdvice</td>
+<td title="Message">Exiting from method::ResponseObject com.example.service.UserService.fetchAllUsers(String)  with arguments::[Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNTk4MDg1Mjc3MjE4IiwianRpIjoiMDlkNGFlYTAtNzA4OC00Y2I3LTgzMDktNTVmZGYwYzVjZTA2IiwiaWF0IjoxNTk3OTEyNDc3LCJleHAiOjE1OTgwODUyNzd9.Ge1nCsU4mDaDmO097MKmjxqBMs3snb6GZwBwyamu19VRzoFaYOaOD1cgQ2vBbrOL4SQ9WIhZG1Fvl8POWdprkw]</td>
+</tr>
+
+<tr>
+<td>43584</td>
+<td title="http-nio-9000-exec-3 thread">http-nio-9000-exec-3</td>
+<td title="Level">INFO</td>
+<td title="com.example.aspect.CachingAdvice category">com.example.aspect.CachingAdvice</td>
+<td title="Message">Response from service class(CachingAdvice)</td>
+</tr>
+
+<tr>
+<td>57121</td>
 <td title="http-nio-9000-exec-5 thread">http-nio-9000-exec-5</td>
 <td title="Level">INFO</td>
 <td title="com.example.controller.UserController category">com.example.controller.UserController</td>
 <td title="Message">fetchAllUsers() initiated</td>
+</tr>
+
+<tr>
+<td>57121</td>
+<td title="http-nio-9000-exec-5 thread">http-nio-9000-exec-5</td>
+<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="com.example.aspect.CachingAdvice category">com.example.aspect.CachingAdvice</td>
+<td title="Message">CachingAdvice(key):ResponseObject com.example.service.UserService.fetchAllUsers(String)[Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNTk4MDg1Mjc3MjE4IiwianRpIjoiMDlkNGFlYTAtNzA4OC00Y2I3LTgzMDktNTVmZGYwYzVjZTA2IiwiaWF0IjoxNTk3OTEyNDc3LCJleHAiOjE1OTgwODUyNzd9.Ge1nCsU4mDaDmO097MKmjxqBMs3snb6GZwBwyamu19VRzoFaYOaOD1cgQ2vBbrOL4SQ9WIhZG1Fvl8POWdprkw]</td>
+</tr>
+
+<tr>
+<td>57121</td>
+<td title="http-nio-9000-exec-5 thread">http-nio-9000-exec-5</td>
+<td title="Level">INFO</td>
+<td title="com.example.aspect.CachingAdvice category">com.example.aspect.CachingAdvice</td>
+<td title="Message">Response from cache(CachingAdvice)</td>
 </tr>
